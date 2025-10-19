@@ -25,7 +25,7 @@ spec:
             name: url-db-config
       volumeMounts:
         - name: url-db-storage
-          mountPath: /var/lib/mysql/data
+          mountPath: /var/lib/mysql
   volumeClaimTemplates:
     - metadata:
         name: url-db-storage
