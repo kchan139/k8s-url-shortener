@@ -15,7 +15,7 @@ spec:
         tier: web
     spec:
       containers:
-        - image: localhost/url-shortener-backend:latest
+        - image: localhost/url-shortener-frontend:latest
           name: url-fe
       envFrom:
         - configMapRef:

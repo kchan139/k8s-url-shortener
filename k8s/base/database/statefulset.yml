@@ -23,3 +23,16 @@ spec:
             name: url-db-secret
         - configMapRef:
             name: url-db-config
+      volumeMounts:
+        - name: url-db-storage
+          mountPath: /var/lib/mysql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: url-db-storage
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: local-path
+        # storageClassName: standard
+        resources:
+          requests:
+            storage: 1Gi
