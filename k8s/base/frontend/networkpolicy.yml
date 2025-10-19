@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: url-fe-deny-all-outbound
+  namespace: url-shortener
+spec:
+  podSelector:
+    matchLabels:
+      tier: web
+  policyTypes:
+    - Egress
+  egress: []
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: url-fe-allow-outbound-to-be
+  namespace: url-shortener
+spec:
+  podSelector:
+    matchLabels:
+      tier: web
+  policyTypes:
+    - Egress
+  egress:
+    - to:
+        - podSelector:
+            matchLabels:
+              tier: logic
+      ports:
+        - protocol: TCP
+          port: 8080

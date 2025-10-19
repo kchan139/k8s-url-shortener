@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: url-fe
+  namespace: url-shortener
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: frontend
+  template:
+    metadata:
+      labels:
+        role: frontend
+        tier: web
+    spec:
+      containers:
+        - image: localhost/url-shortener-backend:latest
+          name: url-fe
+      envFrom:
+        - configMapRef:
+            name: url-fe-config
+        - secretRef:
+            name: url-fe-secret
+      livenessProbe:
+        httpGet:
+          path: /health
+          port: 3000
+        initialDelaySeconds: 10
+        periodSeconds: 10
+      readinessProbe:
+        httpGet:
+          path: /health
+          port: 3000
+        initialDelaySeconds: 5
+        periodSeconds: 5

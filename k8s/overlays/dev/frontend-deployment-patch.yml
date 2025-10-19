@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: url-fe
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: url-fe
+          image: localhost/url-shortener-frontend:dev

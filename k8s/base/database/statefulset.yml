@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: url-db
+  namespace: url-shortener
+spec:
+  serviceName: url-db-service
+  replicas: 1
+  selector:
+    matchLabels:
+      role: database
+  template:
+    metadata:
+      labels:
+        role: database
+        tier: data
+    spec:
+      containers:
+        - image: docker.io/library/mysql
+          name: url-db
+      envFrom:
+        - secretRef:
+            name: url-db-secret
+        - configMapRef:
+            name: url-db-config

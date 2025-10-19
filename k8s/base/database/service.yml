@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: url-db-service
+  namespace: url-shortener
+spec:
+  selector:
+    role: database
+  type: ClusterIP
+  ports:
+    - port: 5432
+      targetPort: 5432

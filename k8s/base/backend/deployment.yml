@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: url-be
+  namespace: url-shortener
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: backend
+  template:
+    metadata:
+      labels:
+        role: backend
+        tier: logic
+    spec:
+      containers:
+        - image: localhost/url-shortener-backend:latest
+          name: url-be
+      envFrom:
+        - configMapRef:
+            name: url-be-config
+        - secretRef:
+            name: url-be-secret
+      # livenessProbe:
+      #   httpGet:
+      #     path: /actuator/health
+      #     port: 8888
+      #   initialDelaySeconds: 10
+      #   periodSeconds: 10
+      # readinessProbe:
+      #   httpGet:
+      #     path: /actuator/health
+      #     port: 8888
+      #   initialDelaySeconds: 5
+      #   periodSeconds: 5

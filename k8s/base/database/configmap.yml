@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: url-db-config
+  namespace: url-shortener
+data:
+  SOMETHING: something

@@ -1,0 +1,11 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: url-be
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: url-be
+          image: localhost/url-shortener-backend:dev
