@@ -1,0 +1,31 @@
+package org.url.urlshortenerbe.dtos.responses;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class CampaignResponse {
+    private String id;
+
+    private String name;
+
+    private Date startDate;
+
+    private Date endDate;
+
+    private String description;
+
+    private String userId;
+
+    private Boolean deleted;
+}

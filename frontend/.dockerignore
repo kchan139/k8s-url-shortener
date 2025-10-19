@@ -1,0 +1,29 @@
+node_modules
+dist
+.git
+.gitignore
+.github
+.vscode
+*.md
+.husky
+.env*.local
+
+# Exclude storybook files
+**/*.stories.tsx
+**/*.stories.ts
+**/*.stories.jsx
+**/*.stories.js
+.storybook
+
+# Test files
+**/*.test.tsx
+**/*.test.ts
+**/*.spec.tsx
+**/*.spec.ts
+__tests__
+coverage
+
+# Development files
+.prettierrc
+.prettierignore
+eslint.config.js

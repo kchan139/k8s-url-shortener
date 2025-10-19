@@ -1,0 +1,5 @@
+# Global .gitignore file
+.env*
+!.env.example
+secrets/
+secrets.*
