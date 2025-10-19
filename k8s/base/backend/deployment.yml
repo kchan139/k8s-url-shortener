@@ -17,20 +17,28 @@ spec:
       containers:
         - image: localhost/url-shortener-backend:latest
           name: url-be
-      envFrom:
-        - configMapRef:
-            name: url-be-config
-        - secretRef:
-            name: url-be-secret
-      # livenessProbe:
-      #   httpGet:
-      #     path: /actuator/health
-      #     port: 8888
-      #   initialDelaySeconds: 10
-      #   periodSeconds: 10
-      # readinessProbe:
-      #   httpGet:
-      #     path: /actuator/health
-      #     port: 8888
-      #   initialDelaySeconds: 5
-      #   periodSeconds: 5
+          envFrom:
+            - configMapRef:
+                name: url-be-config
+            - secretRef:
+                name: url-be-secret
+          startupProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            periodSeconds: 10
+            failureThreshold: 15
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            failureThreshold: 3

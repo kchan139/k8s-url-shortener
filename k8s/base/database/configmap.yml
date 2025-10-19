@@ -4,4 +4,4 @@ metadata:
   name: url-db-config
   namespace: url-shortener
 data:
-  SOMETHING: something
+  # MYSQL_INITDB_SKIP_TZINFO: "1"

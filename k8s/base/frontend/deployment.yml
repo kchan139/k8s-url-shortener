@@ -17,20 +17,24 @@ spec:
       containers:
         - image: localhost/url-shortener-frontend:latest
           name: url-fe
-      envFrom:
-        - configMapRef:
-            name: url-fe-config
-        - secretRef:
-            name: url-fe-secret
-      livenessProbe:
-        httpGet:
-          path: /health
-          port: 3000
-        initialDelaySeconds: 10
-        periodSeconds: 10
-      readinessProbe:
-        httpGet:
-          path: /health
-          port: 3000
-        initialDelaySeconds: 5
-        periodSeconds: 5
+          envFrom:
+            - configMapRef:
+                name: url-fe-config
+            - secretRef:
+                name: url-fe-secret
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            periodSeconds: 5
+            failureThreshold: 6  # 30 seconds max
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            periodSeconds: 5

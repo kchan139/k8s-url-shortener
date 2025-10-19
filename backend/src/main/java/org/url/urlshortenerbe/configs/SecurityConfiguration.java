@@ -39,7 +39,11 @@ public class SecurityConfiguration {
         API_PREFIX + "/urls"
     };
 
-    private final String[] GET_PUBLIC_ENDPOINTS = {API_PREFIX + "/auth/me", "/{hash}"};
+    private final String[] GET_PUBLIC_ENDPOINTS = {
+        API_PREFIX + "/auth/me", 
+        "/{hash}", 
+        "/actuator/health"
+    };
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {

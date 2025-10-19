@@ -18,14 +18,41 @@ spec:
       containers:
         - image: docker.io/library/mysql
           name: url-db
-      envFrom:
-        - secretRef:
-            name: url-db-secret
-        - configMapRef:
-            name: url-db-config
-      volumeMounts:
-        - name: url-db-storage
-          mountPath: /var/lib/mysql
+          envFrom:
+            - secretRef:
+                name: url-db-secret
+            - configMapRef:
+                name: url-db-config
+          volumeMounts:
+            - name: url-db-storage
+              mountPath: /var/lib/mysql
+          startupProbe:
+            exec:
+              command:
+                - mysqladmin
+                - ping
+                - -h
+                - localhost
+            periodSeconds: 10
+            failureThreshold: 30  # 300 seconds for initial startup
+          livenessProbe:
+            exec:
+              command:
+                - mysqladmin
+                - ping
+                - -h
+                - localhost
+            periodSeconds: 10
+            timeoutSeconds: 5
+          readinessProbe:
+            exec:
+              command:
+                - mysqladmin
+                - ping
+                - -h
+                - localhost
+            periodSeconds: 5
+            timeoutSeconds: 3
   volumeClaimTemplates:
     - metadata:
         name: url-db-storage

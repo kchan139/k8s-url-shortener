@@ -4,4 +4,4 @@ metadata:
   name: url-fe-config
   namespace: url-shortener
 data:
-  SOMETHING: something
+  VITE_API_URL: /api

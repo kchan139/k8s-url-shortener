@@ -3,6 +3,9 @@ kind: Kustomization
 
 resources:
   - ../../base
+  - secrets/backend.secret.yml
+  - secrets/database.secret.yml
+  - secrets/frontend.secret.yml
 
 patches:
   - path: backend-deployment-patch.yml
