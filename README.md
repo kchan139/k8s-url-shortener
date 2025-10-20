@@ -97,37 +97,37 @@ All pods configured with startup, liveness, and readiness probes:
 ## Project Structure
 
 ```
-k8s
-├── base
-│   ├── backend
-│   │   ├── configmap.yml
-│   │   ├── deployment.yml
-│   │   ├── networkpolicy.yml
-│   │   └── service.yml
-│   ├── database
-│   │   ├── configmap.yml
-│   │   ├── networkpolicy.yml
-│   │   ├── service.yml
-│   │   └── statefulset.yml
-│   ├── frontend
-│   │   ├── configmap.yml
-│   │   ├── deployment.yml
-│   │   ├── networkpolicy.yml
-│   │   └── service.yml
-│   ├── ingress.yml
-│   ├── kustomization.yml
-│   └── namespace.yml
-└── overlays
-    ├── dev
-    │   ├── backend-deployment-patch.yml
-    │   ├── frontend-deployment-patch.yml
-    │   ├── kustomization.yaml
-    │   └── secrets
-    │       ├── backend.secret.example.yml
-    │       ├── database.secret.example.yml
-    │       └── frontend.secret.example.yml
-    ├── prod
-    └── staging
+url-shortener
+├── compose.yml
+├── backend
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src
+├── frontend
+│   ├── Dockerfile
+│   ├── nginx.conf
+│   ├── nginx.conf.local
+│   ├── public
+│   └── src
+└── k8s
+    ├── base
+    │   ├── backend
+    │   │   └── *.yml
+    │   ├── database
+    │   │   └── *.yml
+    │   ├── frontend
+    │   │   └── *.yml
+    │   └── kustomization.yml
+    └── overlays
+        ├── dev
+        │   ├── kustomization.yaml
+        │   └── secrets
+        ├── prod
+        │   ├── kustomization.yaml
+        │   └── secrets
+        └── staging
+             ├── kustomization.yaml
+             └── secrets
 ```
 
 ## Local Development (Docker Compose)
