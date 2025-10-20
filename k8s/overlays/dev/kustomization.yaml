@@ -6,6 +6,9 @@ resources:
   - secrets/backend.secret.yml
   - secrets/database.secret.yml
   - secrets/frontend.secret.yml
+  - configmaps/backend-configmap.yml
+  - configmaps/database-configmap.yml
+  - configmaps/frontend-configmap.yml
 
 patches:
   - path: backend-deployment-patch.yml

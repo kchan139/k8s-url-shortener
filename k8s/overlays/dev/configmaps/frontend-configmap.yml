@@ -4,4 +4,6 @@ metadata:
   name: url-fe-config
   namespace: url-shortener
 data:
+  # Currently useless because we cannot inject env vars at runtime yet
   VITE_API_URL: /api
+  VITE_BASE_URL: http://127.0.0.1:3000

@@ -8,17 +8,14 @@ resources:
   - namespace.yml
   - ingress.yml
 
-  - backend/configmap.yml
   - backend/deployment.yml
   - backend/networkpolicy.yml
   - backend/service.yml
 
-  - frontend/configmap.yml
   - frontend/deployment.yml
   - frontend/networkpolicy.yml
   - frontend/service.yml
 
-  - database/configmap.yml
   - database/networkpolicy.yml
   - database/service.yml
   - database/statefulset.yml
