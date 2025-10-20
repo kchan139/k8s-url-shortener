@@ -9,3 +9,13 @@ spec:
       containers:
         - name: url-be
           image: localhost/url-shortener-backend:dev
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: "-Xmx256m -Xms128m -XX:+ExitOnOutOfMemoryError"
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+            limits:
+              cpu: 300m
+              memory: 640Mi
