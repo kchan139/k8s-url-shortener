@@ -1,9 +1,10 @@
 # Local docker compose
 services:
   frontend:
-    build: ./frontend
-    args:
-        NGINX_CONFIG: nginx.conf.local
+    build:
+      context: ./frontend
+      args:
+          NGINX_CONFIG: nginx.conf.local
     ports:
       - "127.0.0.1:${FRONTEND_PORT}:3000"
     depends_on:

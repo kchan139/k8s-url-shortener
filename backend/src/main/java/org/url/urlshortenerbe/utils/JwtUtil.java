@@ -33,7 +33,7 @@ public class JwtUtil {
     @Value("${jwt.expiration-time}")
     private Long EXPIRATION_TIME;
 
-    @Value("${jwt.refresh_time}")
+    @Value("${jwt.refresh-time}")
     private Long REFRESH_TIME;
 
     private final RevokedTokenRepository revokedTokenRepository;
