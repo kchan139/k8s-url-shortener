@@ -20,6 +20,7 @@ import { ShortenedUrl } from '@/types/url';
 
 import CampaignStats from '../components/campaign-stats';
 import UrlList from '../components/url-list';
+import { SHORT_URL_BASE } from '@/utils/constants';
 
 export const Route = createFileRoute('/campaign/$cpnid/')({
   component: RouteComponent,
@@ -403,7 +404,7 @@ function RouteComponent() {
           children={
             <div className="flex flex-col gap-4">
               <p>
-                https://url-shortener-be-production-aa52.up.railway.app/
+                ${SHORT_URL_BASE}/
                 <span className="font-bold">{focusHash}</span>?r=Facebook
               </p>
               <p>
@@ -426,7 +427,7 @@ function RouteComponent() {
           children={
             <div className="flex flex-col gap-4">
               <p>
-                https://url-shortener-be-production-aa52.up.railway.app/
+                ${SHORT_URL_BASE}/
                 <span className="font-bold">{focusHash}</span>?r=Facebook
               </p>
 
@@ -539,7 +540,7 @@ function RouteComponent() {
                     <div
                       id="shortenedUrl"
                       className="truncate"
-                    >{`https://url-shortener-be-production-aa52.up.railway.app/${shortenedUrl?.hash}?r=Facebook`}</div>
+                    >{`${SHORT_URL_BASE}/${shortenedUrl?.hash}?r=Facebook`}</div>
                   </div>
                 </div>
               </div>

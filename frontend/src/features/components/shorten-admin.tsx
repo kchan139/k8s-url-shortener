@@ -11,6 +11,8 @@ import { handleAxiosError } from '@/helpers/handle-axios-error';
 import UrlsService from '@/services/urls.service';
 import { ShortenedUrl } from '@/types/url';
 
+import { SHORT_URL_BASE } from '@/utils/constants';
+
 enum ShortenPhase {
   SHORTEN = 'SHORTEN',
   RESULT = 'RESULT',
@@ -248,7 +250,7 @@ const ShortenAdmin = ({ userId }: { userId: string }) => {
                   <div
                     id="shortenedUrl"
                     className="truncate"
-                  >{`https://url-shortener-be-production-aa52.up.railway.app/${shortenedUrl?.hash}?r=Facebook`}</div>
+                  >{`${SHORT_URL_BASE}/${shortenedUrl?.hash}?r=Facebook`}</div>
                 </div>
               </div>
             </div>

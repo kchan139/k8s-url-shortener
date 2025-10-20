@@ -13,6 +13,7 @@ import UrlsService from '@/services/urls.service';
 import { ShortenedUrl } from '@/types/url';
 // import AuthService from '@/services/auth.service';
 // import useAuthStore from '@/store/use-auth-store';
+import { SHORT_URL_BASE } from '@/utils/constants';
 
 enum ShortenPhase {
   SHORTEN = 'SHORTEN',
@@ -189,7 +190,7 @@ const ShortenGuest = () => {
               </label>
               <div className="relative flex flex-col items-center justify-start gap-2 lg:items-start">
                 <div className="flex w-full flex-row justify-between rounded border border-solid border-primary bg-white p-3">
-                  <div id="shortenedUrl">{`https://url-shortener-be-production-aa52.up.railway.app/${shortenedUrl?.hash}?r=Facebook`}</div>
+                  <div id="shortenedUrl">{`${SHORT_URL_BASE}/${shortenedUrl?.hash}?r=Facebook`}</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="23"

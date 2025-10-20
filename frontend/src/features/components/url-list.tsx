@@ -7,6 +7,8 @@ import { ShortenedUrl } from '@/types/url';
 
 import Pagination from './pagination';
 
+import { SHORT_URL_BASE } from '@/utils/constants';
+
 type UrlListProps = {
   campaignId?: string;
   urlsList: Array<ShortenedUrl>;
@@ -71,7 +73,7 @@ const UrlList = ({
               {shortenedUrl.longUrl}
             </div>
             <div className="col-span-2 flex flex-row items-center justify-start overflow-hidden truncate whitespace-nowrap">
-              {`https://url-shortener-be-production-aa52.up.railway.app/${shortenedUrl?.hash}?r=Facebook`}
+              {`${SHORT_URL_BASE}/${shortenedUrl?.hash}?r=Facebook`}
             </div>
             <div className="col-span-1 flex flex-row items-center justify-center">
               {shortenedUrl.clickCount}
@@ -103,7 +105,7 @@ const UrlList = ({
                   <button
                     onClick={() => {
                       onClickOpenQrModal(
-                        `https://url-shortener-be-production-aa52.up.railway.app/${shortenedUrl?.hash}?r=Facebook`,
+                        `${SHORT_URL_BASE}/${shortenedUrl?.hash}?r=Facebook`,
                       );
                     }}
                   >
@@ -116,7 +118,7 @@ const UrlList = ({
                   <button
                     onClick={() => {
                       copyUrl(
-                        `https://url-shortener-be-production-aa52.up.railway.app/${shortenedUrl?.hash}?r=Facebook`,
+                        `${SHORT_URL_BASE}/${shortenedUrl?.hash}?r=Facebook`,
                       );
                     }}
                   >
