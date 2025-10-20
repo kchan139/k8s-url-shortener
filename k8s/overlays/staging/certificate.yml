@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: url-shortener-tls
+  namespace: url-shortener
+spec:
+  secretName: url-shortener-tls-secret
+  issuerRef:
+    name: letsencrypt-staging
+    kind: ClusterIssuer
+  dnsNames:
+    - staging.k8s-url.khoa.email
+    - www.staging.k8s-url.khoa.email
