@@ -1,7 +1,9 @@
+# Too restrictive for normal app traffic, may break DNS
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: url-fe-deny-all-outbound
+  # name: fe-egress-deny
+  name: fe-egress-allow
   namespace: url-shortener
 spec:
   podSelector:
@@ -9,26 +11,40 @@ spec:
       tier: web
   policyTypes:
     - Egress
-  egress: []
+  # egress: []
+  egress: [{}] # Uncomment to temporary allow all egress
 
 ---
 
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: url-fe-allow-outbound-to-be
-  namespace: url-shortener
-spec:
-  podSelector:
-    matchLabels:
-      tier: web
-  policyTypes:
-    - Egress
-  egress:
-    - to:
-        - podSelector:
-            matchLabels:
-              tier: logic
-      ports:
-        - protocol: TCP
-          port: 8080
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: fe-egress-be
+#   namespace: url-shortener
+# spec:
+#   podSelector:
+#     matchLabels:
+#       tier: web
+#   policyTypes:
+#     - Egress
+#   egress:
+#     - to:
+#         - podSelector:
+#             matchLabels:
+#               tier: logic
+#       ports:
+#         - protocol: TCP
+#           port: 8080
+#     # DNS egress to CoreDNS pods
+#     - to:
+#         - ipBlock:
+#             cidr: 10.43.0.10/32
+#       ports:
+#         - protocol: UDP
+#           port: 53
+#     - to:
+#         - ipBlock:
+#             cidr: 10.43.0.10/32
+#       ports:
+#         - protocol: TCP
+#           port: 53

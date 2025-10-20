@@ -14,6 +14,20 @@ spec:
         role: frontend
         tier: web
     spec:
+      initContainers:
+        - name: wait-for-backend
+          image: busybox:latest
+          command:
+            - sh
+            - -c
+            - |
+              for i in $(seq 1 30); do
+                nslookup url-be-service.url-shortener.svc.cluster.local && exit 0
+                echo "waiting for backend..."
+                sleep 2
+              done
+              echo "backend not ready, exiting..."
+              exit 1
       containers:
         - image: localhost/url-shortener-frontend:latest
           name: url-fe

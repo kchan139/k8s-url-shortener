@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: url-be-deny-all-inbound
+  name: be-ingress-deny
   namespace: url-shortener
 spec:
   podSelector:
@@ -16,7 +16,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: url-be-allow-fe-inbound
+  name: be-ingress-fe
   namespace: url-shortener
 spec:
   podSelector:
