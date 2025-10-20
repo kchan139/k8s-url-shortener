@@ -4,4 +4,15 @@ metadata:
   name: url-db-config
   namespace: url-shortener
 data:
-  # MYSQL_INITDB_SKIP_TZINFO: "1"
+  my.cnf: |
+    [mysqld]
+    performance_schema = 0
+    innodb_buffer_pool_size = 64M
+    innodb_log_buffer_size = 8M
+    innodb_thread_concurrency = 2
+    max_connections = 20
+    table_open_cache = 128
+    tmp_table_size = 32M
+    key_buffer_size = 16M
+    skip_name_resolve
+

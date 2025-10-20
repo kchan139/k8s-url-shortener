@@ -16,7 +16,7 @@ spec:
         tier: data
     spec:
       containers:
-        - image: docker.io/library/mysql
+        - image: docker.io/library/mysql:8.4-oracle
           name: url-db
           envFrom:
             - secretRef:
@@ -24,6 +24,9 @@ spec:
             - configMapRef:
                 name: url-db-config
           volumeMounts:
+            - name: url-db-config-volume
+              mountPath: /etc/mysql/conf.d/my.cnf
+              subPath: my.cnf
             - name: url-db-storage
               mountPath: /var/lib/mysql
           startupProbe:
@@ -53,6 +56,13 @@ spec:
                 - localhost
             periodSeconds: 5
             timeoutSeconds: 3
+      volumes:
+        - name: url-db-config-volume
+          configMap:
+            name: url-db-config
+            items:
+              - key: my.cnf
+                path: my.cnf
   volumeClaimTemplates:
     - metadata:
         name: url-db-storage
