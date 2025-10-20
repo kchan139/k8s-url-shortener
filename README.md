@@ -121,13 +121,16 @@ url-shortener
     └── overlays
         ├── dev
         │   ├── kustomization.yaml
+        │   ├── configmaps
         │   └── secrets
         ├── prod
         │   ├── kustomization.yaml
+        │   ├── configmaps
         │   └── secrets
         └── staging
-             ├── kustomization.yaml
-             └── secrets
+            ├── kustomization.yaml
+            ├── configmaps
+            └── secrets
 ```
 
 ## Local Development (Docker Compose)
