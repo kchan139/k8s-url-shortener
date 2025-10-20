@@ -1,23 +1,33 @@
-# Stage 01: build
-# Start with Maven image that includes JDK 21
-FROM maven:3.9.9-amazoncorretto-21 AS build
-
-# Copy source code and pom.xml file to /app folder
+# === Stage 1: Build ===
+FROM maven:3.9.9-amazoncorretto-21-alpine AS build
 WORKDIR /app
+
 COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
 COPY src ./src
+RUN mvn package -DskipTests -B
 
-# Build source code with maven
-RUN mvn package -DskipTests
+# === Stage 2: Runtime ===
+FROM eclipse-temurin:21-jre-alpine AS runtime
 
-# Stage 2: Create image
-# Start with Amazon Correto JDK 21
-FROM amazoncorretto:21.0.4
+RUN addgroup -g 1001 -S appgroup && \
+    adduser -u 1001 -S appuser -G appgroup
 
-# Set working flder to App and copy compiled file from above step
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build --chown=appuser:appgroup /app/target/*.jar app.jar
 
-# Command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+USER appuser
 
+EXPOSE 8080
+
+# JVM optimizations
+ENTRYPOINT ["java", \
+     "-server", \
+     "-XX:+UseContainerSupport", \
+     "-XX:MaxRAMPercentage=75.0", \
+     "-XX:+UseG1GC", \
+     "-XX:+UseStringDeduplication", \
+     "-XX:+OptimizeStringConcat", \
+     "-Djava.security.egd=file:/dev/./urandom", \
+     "-jar", "app.jar"]
