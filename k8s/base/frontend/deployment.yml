@@ -28,9 +28,23 @@ spec:
               done
               echo "backend not ready, exiting..."
               exit 1
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 50m
+              memory: 32Mi
       containers:
         - image: localhost/url-shortener-frontend:latest
           name: url-fe
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
           envFrom:
             - configMapRef:
                 name: url-fe-config

@@ -17,6 +17,13 @@ spec:
       containers:
         - image: localhost/url-shortener-backend:latest
           name: url-be
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
           envFrom:
             - configMapRef:
                 name: url-be-config

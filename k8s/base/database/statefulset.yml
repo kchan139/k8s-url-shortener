@@ -18,6 +18,13 @@ spec:
       containers:
         - image: docker.io/library/mysql:8.4-oracle
           name: url-db
+          resources:
+            requests:
+              cpu: 50m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 768Mi
           envFrom:
             - secretRef:
                 name: url-db-secret
