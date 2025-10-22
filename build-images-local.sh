@@ -16,12 +16,21 @@ else
   exit 1
 fi
 
+if command -v podman &> /dev/null; then
+    TOOL=podman
+elif command -v docker &> /dev/null; then
+    TOOL=docker
+else
+    echo "Error: podman or docker is not installed." >&2
+    exit 1
+fi
+
 # Build & push backend
-podman build -t url-shortener-backend:dev ./backend
-podman save url-shortener-backend:dev | sudo k3s ctr images import -
+$TOOL build -t localhost/url-shortener-backend:dev ./backend
+$TOOL save localhost/url-shortener-backend:dev | sudo k3s ctr images import -
 
 # Build & push frontend
-podman build -t url-shortener-frontend:dev ./frontend
-podman save url-shortener-frontend:dev | sudo k3s ctr images import -
+$TOOL build -t localhost/url-shortener-frontend:dev ./frontend
+$TOOL save localhost/url-shortener-frontend:dev | sudo k3s ctr images import -
 
 echo "All images pushed to local repository with tag: dev"
